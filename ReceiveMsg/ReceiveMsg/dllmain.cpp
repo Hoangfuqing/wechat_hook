@@ -1,4 +1,4 @@
-﻿// dllmain.cpp : 定义 DLL 应用程序的入口点。
+// dllmain.cpp : 定义 DLL 应用程序的入口点。
 #include "pch.h"
 #include <Windows.h>
 #include "resource.h"
@@ -16,9 +16,7 @@ using namespace std;
 
 SOCKET Global_Client = 0;
 
-
 VOID hold_the_socket();
-DWORD ThreadProc_read();
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -28,16 +26,15 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
-        while (Global_Client == 0)
-        {
-            Global_Client = Connect_to_Server(); //启动连接服务器
-            if (Global_Client == 0)
-                MessageBox(NULL, L"首次连接Python server失败", L"Connect server error", 0);
-        }
-		
-        CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)hold_the_socket, NULL, NULL, 0);
-        CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ThreadProc_read, hModule, 0, NULL);
-	break;
+		while (Global_Client == 0)
+		{
+			Global_Client = Connect_to_Server(); //启动连接服务器
+			if (Global_Client == 0)
+				MessageBox(NULL, L"首次连接Python server失败", L"Connect server error", 0);
+		}
+		CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)StartHookWeChat, NULL, NULL, 0);
+		CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)hold_the_socket, NULL, NULL, 0);
+		break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
     case DLL_PROCESS_DETACH:
@@ -83,10 +80,4 @@ VOID hold_the_socket()
 		}
 		Sleep(2 * 1000);  //延时2s
 	}
-}
-
-DWORD ThreadProc_read()
-{
-    HookWechatRead();
-    return TRUE;
 }
