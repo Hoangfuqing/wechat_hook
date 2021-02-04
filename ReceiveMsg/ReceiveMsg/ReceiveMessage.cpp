@@ -27,19 +27,12 @@ DWORD cEbp = 0;
 DWORD cEsi = 0;
 DWORD cEdi = 0;
 
-// Êı¾İ·¢ËÍµ½socket¿Í»§¶Ë
+// æ•°æ®å‘é€åˆ°socketå®¢æˆ·ç«¯
 VOID send_to_py_server(DWORD msgAdd);
-
-
-//»ñÈ¡Ä£¿é»ùÖ·
-DWORD getModuleAddress()
-{
-	return (DWORD)LoadLibrary(L"WeChatWin.dll");
-}
 
 VOID send_to_py_server(DWORD msgAdd)
 {
-	//ĞÅÏ¢¿éµÄÎ»ÖÃ
+	//ä¿¡æ¯å—çš„ä½ç½®
 	DWORD* msgAddress = (DWORD*)msgAdd;
 	DWORD wxidAdd = (*msgAddress + 0x40);
 	DWORD wxid2Add = (*msgAddress + 0x150);
@@ -78,7 +71,7 @@ VOID send_to_py_server(DWORD msgAdd)
 }
 
 
-//Ìø×ª¹ıÀ´µÄº¯Êı ÎÒÃÇ×Ô¼ºµÄ
+//è·³è½¬è¿‡æ¥çš„å‡½æ•° æˆ‘ä»¬è‡ªå·±çš„
 VOID __declspec(naked) HookF()
 {
 	__asm {
@@ -94,7 +87,7 @@ VOID __declspec(naked) HookF()
 		pushad
 		pushfd
 	}
-	//È»ºóÌø×ªµ½ÎÒÃÇ×Ô¼ºµÄ´¦Àíº¯Êı Ïë¸ÉÂï¸ÉÂï
+	//ç„¶åè·³è½¬åˆ°æˆ‘ä»¬è‡ªå·±çš„å¤„ç†å‡½æ•° æƒ³å¹²å˜›å¹²å˜›
 	send_to_py_server(cEsi);
 	retAdd = WinAdd + 0x3BA682;
 	__asm {
@@ -117,11 +110,11 @@ VOID StartHook(DWORD hookAdd, LPVOID jmpAdd)
 	}
 }
 
-VOID HookWechatRead()
+VOID StartHookWeChat()
 {
-	//ÏûÏ¢½ÓÊÕ 3.0.0.57 0x3BA67D
-	hookAdd = getModuleAddress() + 0x3BA67D;
+	//æ¶ˆæ¯æ¥æ”¶ 3.0.0.57 0x3BA67D
+	hookAdd = getWechatWin() + 0x3BA67D;
 	hWHND = OpenProcess(PROCESS_ALL_ACCESS, NULL, GetCurrentProcessId());
-	WinAdd = getModuleAddress();
+	WinAdd = getWechatWin();
 	StartHook(hookAdd, &HookF);
 }
