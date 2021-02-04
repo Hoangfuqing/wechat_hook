@@ -59,7 +59,7 @@ VOID hold_the_socket()
 	_itoa_s(PID, pid_str, 10);
 	//get_process_pid(processPid); //获取微信进程pid， GetCurrentProcessId不能在其他文件调用
 	swprintf(processPid, sizeof(processPid), L"%hs", pid_str);
-	swprintf_s(buff, L"{\"pid\":%s,\"type\":%s}*5201314*", processPid, type);
+	swprintf_s(buff, L"{\"pid\":%s,\"type\":%s}*88888888*", processPid, type);
 	const char* sendData = UnicodeToChar(buff);  //将Unicode编码转成CHAR类型，用于socket传输
 	SOCKET client = 0;
 	while (true)
