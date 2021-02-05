@@ -1,4 +1,4 @@
-﻿// WechatInject.cpp : 定义应用程序的入口点。
+// WechatInject.cpp : 定义应用程序的入口点。
 //
 
 #include "stdafx.h"
@@ -9,12 +9,9 @@
 #include <stdlib.h>
 #include <direct.h>
 #include <stdio.h>
-#include "Inject.h"
 #include "resource.h"
 
-
 #define WECHAT_PROCESS_NAWE L"WeChat.exe"
-#define DLLNAME L"SendMessage.dll"
 
 INT_PTR CALLBACK DialogProc(_In_ HWND hwndDlg, _In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam);
 VOID InjectDLL(CHAR* dllPath, TCHAR* wechatPath);
@@ -64,7 +61,7 @@ BOOL handleEventMsg(HWND hwndDlg, WPARAM wParam)
 	}
 	else
 	{
-		sprintf_s(paths, "%ws\\ReceiveMsg.dll", buffer);
+		sprintf_s(paths, "%ws\\WechatApi.dll", buffer);
 	}
 	switch (wParam)
 	{
@@ -96,8 +93,8 @@ DWORD ProcessNameFindPID(LPCWSTR ProcessName)
 
 VOID InjectDLL(CHAR* dllPath, TCHAR* wechatPath)
 {
-	OutputDebugStringA(dllPath);
-	OutputDebugString(wechatPath);
+	/*OutputDebugStringA(dllPath);
+	OutputDebugString(wechatPath);*/
 	DWORD PID = ProcessNameFindPID(WECHAT_PROCESS_NAWE);
 	if (PID == 0)
 	{
