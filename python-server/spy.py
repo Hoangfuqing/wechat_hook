@@ -1,3 +1,4 @@
+import json
 from ast import literal_eval
 from socket import socket, AF_INET, SOCK_STREAM
 from threading import Thread
@@ -87,8 +88,39 @@ class WeChatSpy:
                                 self.__parser(data)
                 data_str = ""
 
+    def __send(self,data,pid):
+        if pid:
+            socket_client = self.__pid2client.get(pid)
+        else:
+            socket_client_list = list(self.__pid2client.values())
+            socket_client = socket_client_list[0] if socket_client_list else None
+        if socket_client:
+            data = json.dumps(data, ensure_ascii=False)
+            try:
+                socket_client.send(data.encode(encoding="utf-8"))
+            except Exception as e:
+                for pid, v in self.__pid2client.items():
+                    if v == socket_client:
+                        self.__pid2client.pop(pid)
+                        return self.logger.warning(f"A WeChat process (PID:{pid}) has disconnected: {e}")
+                else:
+                    pid = "unknown"
+                    return self.logger.warning(f"A WeChat process (PID:{pid}) has disconnected: {e}")
+
     def run(self, background=False):
         if not background:
             while True:
                 sleep(86400)
 
+    def send_text(self, wxid, content, at_wxid="", pid=None):
+        """
+        发送文本消息
+        :param wxid: 文本消息接收wxid（个人id或者群id）
+        :param content: 文本消息内容
+        :param at_wxid: 如果wxid为群wxid且需要@群成员 此参数为被@群成员wxid，以英文逗号分隔
+        :param pid: 微信的进程id
+        """
+        if not wxid.endswith("chatroom"):
+            at_wxid = ""
+        data = {"code": 1, "wxid": wxid, "at_wxid": at_wxid, "content": content}
+        self.__send(data, pid)
