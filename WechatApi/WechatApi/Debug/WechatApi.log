@@ -1,0 +1,20 @@
+﻿  pch.cpp
+  ReceiveMessage.cpp
+Z:\c_project\wechat_dll\ReceiveMsg\ReceiveMsg\ReceiveMessage.cpp(60,20): warning C4477: “swprintf_s”: 格式字符串“%s”需要类型“wchar_t *”的参数，但可变参数 6 拥有了类型“LPVOID”
+Z:\c_project\wechat_dll\ReceiveMsg\ReceiveMsg\ReceiveMessage.cpp(60,20): warning C4477: “swprintf_s”: 格式字符串“%s”需要类型“wchar_t *”的参数，但可变参数 7 拥有了类型“LPVOID”
+Z:\c_project\wechat_dll\ReceiveMsg\ReceiveMsg\ReceiveMessage.cpp(64,20): warning C4477: “swprintf_s”: 格式字符串“%s”需要类型“wchar_t *”的参数，但可变参数 5 拥有了类型“LPVOID”
+Z:\c_project\wechat_dll\ReceiveMsg\ReceiveMsg\ReceiveMessage.cpp(64,20): warning C4477: “swprintf_s”: 格式字符串“%s”需要类型“wchar_t *”的参数，但可变参数 6 拥有了类型“LPVOID”
+Z:\c_project\wechat_dll\ReceiveMsg\ReceiveMsg\ReceiveMessage.cpp(64,20): warning C4477: “swprintf_s”: 格式字符串“%s”需要类型“wchar_t *”的参数，但可变参数 7 拥有了类型“LPVOID”
+  socketTool.cpp
+Z:\c_project\wechat_dll\ReceiveMsg\ReceiveMsg\socketTool.cpp(16,33): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+  utils.cpp
+  cJSON.cpp
+Z:\c_project\wechat_dll\WechatApi\WechatApi\cJSON.cpp(126,12): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
+Z:\c_project\wechat_dll\WechatApi\WechatApi\cJSON.cpp(133,56): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
+Z:\c_project\wechat_dll\WechatApi\WechatApi\cJSON.cpp(134,48): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
+Z:\c_project\wechat_dll\WechatApi\WechatApi\cJSON.cpp(135,20): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
+Z:\c_project\wechat_dll\WechatApi\WechatApi\cJSON.cpp(244,14): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
+  dllmain.cpp
+  SendMessage.cpp
+  正在生成代码...
+  WechatApi.vcxproj -> Z:\c_project\wechat_dll\WechatApi\Debug\WechatApi.dll
